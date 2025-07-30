@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新局設定</title>
+    <link href="libs/bootstrap5/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container-fluid mt-5">
+        <h3 class="text-center mb-1" style="color:#b166b1;">新局設定</h3>
+        <div class="form-group row">
+            <!-- <label for="courts-select" class="col-sm-2 col-form-label">球場數量</label> -->
+            <div class = "col-sm-3 mb-3">
+                <select id="courts-select" class="form-select form-select">
+                    <option selected>選擇球場數量</option>
+                    <option value="1">球場數: 1</option>
+                    <option value="2">球場數: 2</option>
+                    <option value="3">球場數: 3</option>
+                    <option value="4">球場數: 4</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h4>所有參與者</h4>
+                    <div>
+                        <button id="load-participants-btn" class="btn btn-primary">載入名單</button>
+                        <button id="select-all-btn" class="btn btn-primary d-none">全選</button>
+                        <button id="add-participant-btn" class="btn btn-primary">✚</button>
+                    </div>
+                </div>
+                <div id="all-participants" class="participant-list"></div>
+                <div class="text-center mt-2">
+                    <button id="download-participants-btn" class="btn btn-primary btn-sm">儲存所有參與者</button>
+                </div>
+            </div>
+            <div class="col-md-2 text-center align-self-center">
+                <button id="move-to-session-btn" class="btn btn-primary">＞</button>
+            </div>
+            <div class="col-md-5">
+                <h4>本次參與者</h4>
+                <div id="session-participants" class="participant-list"></div>
+                <div class="text-center mt-2">
+                    <!-- <button id="download-signed-up-btn" class="btn btn-primary btn-sm">儲存本次參與者</button> -->
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <button id="confirm-btn" class="btn btn-primary btn-lg">確認</button>
+        </div>
+    </div>
+
+    <!-- Add Participant Modal -->
+    <div class="modal fade" id="add-participant-modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">新增參加者</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="participant-name" class="form-label">姓名</label>
+                        <input type="text" class="form-control" id="participant-name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="skill-level" class="form-label">程度</label>
+                        <select class="form-select" id="skill-level">
+                            <option value="Expert">大師</option>
+                            <option value="Advanced">高階</option>
+                            <option value="Intermediate">中階</option>
+                            <option value="Entry">入門</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="save-participant-btn">新增</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-3 pt-3 border-top">
+        <h3 class="text-center mb-4" style="color:lightgrey">操作步驟</h3>
+        <ol class="list-group list-group-numbered">
+            <li class="list-group-item" style="background-color: #2d2e37; color: white;">設定<span class="highlight-text">球場數量</span>：1~4</li>
+            <li class="list-group-item" style="background-color: #2d2e37; color: white;"><span class="highlight-text">載入名單</span>: 選擇安裝目錄下的participants.json檔</li>
+            <li class="list-group-item" style="background-color: #2d2e37; color: white;"><span class="highlight-text">新增參與者</span>: 點選「+」，輸入姓名並選擇程度，按<span class="highlight-text">新增</span>即可</li>
+            <li class="list-group-item" style="background-color: #2d2e37; color: white;">球員的程度以顏色區分：<strong style="color: rgb(101, 181, 3);">綠色</strong>=入門，<strong style="color: #256eff;">藍色</strong>=中階，<strong style="color: orange;">橘色</strong>=高階，<strong style="color: red;">紅色</strong>=大師</li>
+            <li class="list-group-item" style="background-color: #2d2e37; color: white;">名單載入後，勾選本次有報名臨打的球員</li>
+            <li class="list-group-item" style="background-color: #2d2e37; color: white;">按「&gt;」 按鈕將勾選名單複製到<span class="highlight-text">本次參與者</span>中</li>
+            <li class="list-group-item" style="background-color: #2d2e37; color: white;">點選球員名後面的「$」符號，以標記球員是否已付費</li>
+            <li class="list-group-item" style="background-color: #2d2e37; color: white;">可利用<span class="highlight-text">儲存</span>功能將名單保留至下次使用 (下載.json檔案後覆蓋原本的檔案)</li>
+            <li class="list-group-item" style="background-color: #2d2e37; color: white;">按<span class="highlight-text">確認</span>即可開始球局 (開啟主頁面)</li>
+        </ol>
+    </div>
+    <div class="container mt-4 pt-0 border-top">
+        <div class ="text-center text-secondary" style="font-size: 0.8rem;">Designed by Swen Fang @2025 WUYU Innovation Co., LTD.</div>
+    </div>
+
+    <script src="libs/bootstrap5/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js/script.js"></script>
+</body>
+</html>

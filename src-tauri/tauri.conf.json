@@ -1,0 +1,56 @@
+{
+  "$schema": "https://schema.tauri.app/config/1",
+  "build": {
+    "devPath": "../src",
+    "distDir": "../src",
+    "withGlobalTauri": true
+  },
+  "package": {
+    "productName": "Queue_Assistant_Badminton",
+    "version": "0.1.0"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false,
+      "fs": {
+        "readFile": true,
+        "scope": ["$APP/*", "$DESKTOP/*"]
+      },
+      "dialog": {
+        "all": true
+      },
+      "window": {
+        "all": false,
+        "create": true
+      },
+      "shell": {
+        "all": false,
+        "open": true
+      }
+    },
+    "windows": [
+      {
+        "label": "main",
+        "url": "index.html",
+        "title": "羽球臨打自動排場助手 V1.0",
+        "width": 910,
+        "height": 970
+      }
+    ],
+    "security": {
+      "csp": null
+    },
+    "bundle": {
+      "active": true,
+      "targets": "all",
+      "identifier": "com.QueueAssistant.app",
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/badminton.ico"
+      ]
+    }
+  }
+}
